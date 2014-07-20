@@ -164,4 +164,36 @@ public class MapFragment extends Fragment {
 			public void onReceivePoi(BDLocation poiLocation) {
 			}
 		}
+
+
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onDestroy()
+	 */
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		  mMapView.onDestroy();  
+	}
+
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onPause()
+	 */
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		mMapView.onPause();
+	}
+
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onResume()
+	 */
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		mMapView.onResume();
+	}
+		 
 }
