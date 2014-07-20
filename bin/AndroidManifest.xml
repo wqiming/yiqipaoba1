@@ -13,6 +13,10 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="IRjczKvAUouNcvypXY9k1TfP" />
+
         <activity
             android:name="com.example.yiqipaoba1.LoadActivity"
             android:label="@string/app_name" >
@@ -25,6 +29,18 @@
         <activity
             android:name="com.example.yiqipaoba1.MainActivity"
             android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="com.example.yiqipaoba1.Fragment_runningmode"
+            android:label="@string/title_activity_fragment_runningmode" >
+        </activity>
+        <activity
+            android:name="com.example.yiqipaoba1.Startrunning"
+            android:label="@string/title_activity_startrunning" >
+        </activity>
+        <activity
+            android:name="com.example.yiqipaoba1.MapActivity"
+            android:label="@string/title_activity_map" >
         </activity>
     </application>
 

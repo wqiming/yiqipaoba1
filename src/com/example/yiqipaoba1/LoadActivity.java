@@ -2,6 +2,8 @@ package com.example.yiqipaoba1;
 
 import java.util.Calendar;
 
+import com.baidu.mapapi.SDKInitializer;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -23,9 +25,11 @@ import android.widget.EditText;
 public class LoadActivity extends Activity {
     private View loadLayout=null;
     private static final String TAG = "Load_Activity";
+   
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
+    	SDKInitializer.initialize(this.getApplicationContext());
         setContentView(R.layout.activity_load);
         loadLayout= (View)findViewById(R.id.load_layout); 
 		
@@ -47,17 +51,23 @@ public class LoadActivity extends Activity {
 			Log.d(TAG,"open");
 		}else{
 			Log.d(TAG,"closed");
+			
 			final Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle("温馨提示");
 			builder.setMessage("打开GPS?");
 			builder.setPositiveButton("确定"
 				, new OnClickListener()
 				{
+					
 					@Override
 					public void onClick(DialogInterface dialog, int which)
 					{
+						
 						startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+						
 					}
+					
+				  
 				});
 			// 为对话框设置一个“取消”按钮
 			builder.setNegativeButton("取消"
@@ -67,10 +77,13 @@ public class LoadActivity extends Activity {
 					public void onClick(DialogInterface dialog, int which)
 					{
 						dialog.dismiss();
+						finish();
 					}
 				});
 			//创建、并显示对话框
 			builder.create().show();
+			
+			
 		 }
 		
 		 
@@ -99,18 +112,13 @@ public class LoadActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if(isOPen(this)){
+		if(isOPen(getApplicationContext())){
 			Log.d(TAG, "load main activity");
-			   Intent intent = new Intent(this, MainActivity.class);
+			   Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 			   //startActivity(intent);
 			   startActivityForResult(intent, 2);
-			}
-		
+			}		
 	}
-
-
-
-	
 
 
 

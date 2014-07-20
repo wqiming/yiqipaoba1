@@ -1,15 +1,30 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:noHistory="true"
-    tools:context="com.example.yiqipaoba1.Fragment_loverunning" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/table1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:id="@+id/buttoncontainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="loverunning" />
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="0dip"
+            android:layout_weight="50"
+            android:layout_height="fill_parent"
+            android:text="运动模式" />
 
-</FrameLayout>
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dip"
+            android:layout_weight="50"
+            android:layout_height="fill_parent"
+            android:text="开始跑步" />
+
+    </LinearLayout>
+
+</RelativeLayout>

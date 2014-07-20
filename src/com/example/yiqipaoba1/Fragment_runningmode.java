@@ -2,24 +2,14 @@ package com.example.yiqipaoba1;
 
 import java.util.Locale;
 
-
-
-
-
-
-
-import com.baidu.mapapi.SDKInitializer;
-
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class MainActivity extends ActionBarActivity implements
+public class Fragment_runningmode extends ActionBarActivity implements
 		ActionBar.TabListener {
 
 	/**
@@ -44,17 +34,12 @@ public class MainActivity extends ActionBarActivity implements
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
-	
-	private static final String TAG = "Main_Activity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_runningmode);
 
-		setTitle("Ò»ÆðÅÜ°É");
-		
 		// Set up the action bar.
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -91,30 +76,11 @@ public class MainActivity extends ActionBarActivity implements
 		}
 	}
 
-	
-	
-	/* (non-Javadoc)
-	 * @see android.support.v7.app.ActionBarActivity#onBackPressed()
-	 */
-	@Override
-	public void onBackPressed() {
-		// TODO Auto-generated method stub
-		Log.d(TAG,"back pressed");
-		Intent intent=new Intent();
-		setResult(2,intent);
-		finish();
-		//super.onBackPressed();
-	
-		
-	}
-
-
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.fragment_runningmode, menu);
 		return true;
 	}
 
@@ -163,23 +129,7 @@ public class MainActivity extends ActionBarActivity implements
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a PlaceholderFragment (defined as a static inner class
 			// below).
-			//return PlaceholderFragment.newInstance(position + 1);
-			Fragment fragment=null;
-        	switch(position){
-        	case 0:
-        		fragment = new Fragment_loverunning();
-        		break;
-        	case 1:
-        		fragment = new Fragment_runtogether();
-        		break;
-        	case 2:
-        		fragment = new Fragment_runningbar();
-        		break;
-            default:
-            	finish();
-        		break;
-        	}
-        	return fragment;
+			return PlaceholderFragment.newInstance(position + 1);
 		}
 
 		@Override
@@ -203,5 +153,41 @@ public class MainActivity extends ActionBarActivity implements
 		}
 	}
 
+	/**
+	 * A placeholder fragment containing a simple view.
+	 */
+	public static class PlaceholderFragment extends Fragment {
+		/**
+		 * The fragment argument representing the section number for this
+		 * fragment.
+		 */
+		private static final String ARG_SECTION_NUMBER = "section_number";
+
+		/**
+		 * Returns a new instance of this fragment for the given section number.
+		 */
+		public static PlaceholderFragment newInstance(int sectionNumber) {
+			PlaceholderFragment fragment = new PlaceholderFragment();
+			Bundle args = new Bundle();
+			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+			fragment.setArguments(args);
+			return fragment;
+		}
+
+		public PlaceholderFragment() {
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_runningmode,
+					container, false);
+			TextView textView = (TextView) rootView
+					.findViewById(R.id.section_label);
+			textView.setText(Integer.toString(getArguments().getInt(
+					ARG_SECTION_NUMBER)));
+			return rootView;
+		}
+	}
 
 }
