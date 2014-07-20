@@ -7,11 +7,19 @@
     tools:context="com.example.yiqipaoba1.Startrunning"
     tools:ignore="MergeRootFrame" >
 
-   <FrameLayout
-        android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+  <fragment
+      android:id="@+id/map"
+      android:name="com.example.yiqipaoba1.MapFragment"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="2.21" />
 
-   
+  <fragment
+      android:id="@+id/status"
+      android:name="com.example.yiqipaoba1.StatusFragment"
+      android:layout_weight="2"
+      android:layout_width="match_parent"
+      android:layout_height="0dp" />
+  
 
 </LinearLayout>

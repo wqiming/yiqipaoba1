@@ -7,6 +7,7 @@ import com.baidu.mapapi.map.BaiduMapOptions;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.SupportMapFragment;
 
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -26,13 +27,15 @@ public class Startrunning extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_startrunning);
     	setTitle("¿ªÊ¼ÅÜ²½");
-		MapStatus ms = new MapStatus.Builder().overlook(-20).zoom(15).build();
+		/*
+    	MapStatus ms = new MapStatus.Builder().overlook(-20).zoom(15).build();
 		BaiduMapOptions bo = new BaiduMapOptions().mapStatus(ms)
 				.compassEnabled(false).zoomControlsEnabled(false);
 		map = SupportMapFragment.newInstance(bo);
 		FragmentManager manager = getSupportFragmentManager();
+		//MapController controller = map.getMapView().getController();
 		manager.beginTransaction().add(R.id.map, map, "map_fragment").commit();
-		
+		*/
 	    
 	}
 
@@ -56,21 +59,5 @@ public class Startrunning extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_startrunning,
-					container, false);
-			return rootView;
-		}
-	}
-
+	
 }

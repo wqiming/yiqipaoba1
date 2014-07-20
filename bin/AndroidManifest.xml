@@ -42,8 +42,19 @@
             android:name="com.example.yiqipaoba1.MapActivity"
             android:label="@string/title_activity_map" >
         </activity>
-    </application>
+    <service
+    android:name="com.baidu.location.f"
+    android:enabled="true"
+    android:process=":remote"
+    android:permission="android.permission.BAIDU_LOCATION_SERVICE">
+    <intent-filter>
+        <action android:name="com.baidu.location.service_v2.6"></action>
+    </intent-filter>
+</service> 
+   
 
+    </application>
+    
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
