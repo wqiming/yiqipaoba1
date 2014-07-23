@@ -19,11 +19,13 @@ import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.map.MyLocationConfigeration.LocationMode;
 import com.baidu.mapapi.model.LatLng;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,13 +35,13 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
  * A simple {@link android.support.v4.app.Fragment} subclass.
  * 
  */
-public class MapFragment extends Fragment {
+public class MapFragment extends Fragment implements OnClickListener {
 	LocationClient mLocClient;
 	public MyLocationListenner myListener = new MyLocationListenner();
 	private LocationMode mCurrentMode;
 	BitmapDescriptor mCurrentMarker;
-	
-	
+	Button btn;
+	Startrunning mlistener;
 	MapView mMapView = null;  
 	private BaiduMap mBaiduMap;
 	public EditText lat_ET = null;
@@ -60,6 +62,8 @@ public class MapFragment extends Fragment {
 			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View myFragmentView=inflater.inflate(R.layout.fragment_map, container, false);
+		btn=(Button) myFragmentView.findViewById(R.id.changeview);
+		btn.setOnClickListener(this);
 		mMapView = (MapView)myFragmentView.findViewById(R.id.bmapView); 
 		
 		mBaiduMap = mMapView.getMap();  
@@ -174,7 +178,11 @@ public class MapFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		  mMapView.onDestroy();  
+		  mLocClient.stop();
+		  Log.i("MapFragment","onDestroy");
 	}
+
+	
 
 	/* (non-Javadoc)
 	 * @see android.support.v4.app.Fragment#onPause()
@@ -184,6 +192,7 @@ public class MapFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onPause();
 		mMapView.onPause();
+		Log.i("MapFragment","onPause");
 	}
 
 	/* (non-Javadoc)
@@ -194,6 +203,27 @@ public class MapFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onResume();
 		mMapView.onResume();
+		Log.i("MapFragment","onResume");
+	}
+
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onAttach(android.app.Activity)
+	 */
+	@Override
+	public void onAttach(Activity activity) {
+		// TODO Auto-generated method stub
+		super.onAttach(activity);
+		mlistener=(Startrunning) activity;
+		
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		if(v.getId() == R.id.changeview){
+			Log.i("MapFragment","changeview clicked");
+			mlistener.changeview();
+		}
 	}
 		 
 }

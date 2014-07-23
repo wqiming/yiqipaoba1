@@ -1,25 +1,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/startrunning"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.yiqipaoba1.Startrunning"
     tools:ignore="MergeRootFrame" >
 
-  <fragment
-      android:id="@+id/map"
-      android:name="com.example.yiqipaoba1.MapFragment"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="2.21" />
+    <LinearLayout
+        android:id="@+id/maplayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.63"
+        android:orientation="vertical" >
+    </LinearLayout>
 
-  <fragment
-      android:id="@+id/status"
-      android:name="com.example.yiqipaoba1.StatusFragment"
-      android:layout_weight="2"
-      android:layout_width="match_parent"
-      android:layout_height="0dp" />
-  
+    <LinearLayout
+        android:id="@+id/statuslayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.70"
+        android:orientation="vertical" >
+    </LinearLayout>
 
 </LinearLayout>
