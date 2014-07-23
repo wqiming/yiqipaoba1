@@ -18,6 +18,7 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.map.MyLocationConfigeration.LocationMode;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -44,6 +45,7 @@ public class MapFragment extends Fragment implements OnClickListener {
 	Startrunning mlistener;
 	MapView mMapView = null;  
 	private BaiduMap mBaiduMap;
+	public boolean running_flag;
 	public EditText lat_ET = null;
 	public EditText log_ET = null;
 	
@@ -53,6 +55,17 @@ public class MapFragment extends Fragment implements OnClickListener {
 		OnCheckedChangeListener radioButtonListener;
 		Button requestLocButton;
 		boolean isFirstLoc = true;// 是否首次定位
+	
+	public void OnResumeRunning() {
+	    this.running_flag=true;
+	    isFirstLoc = true;
+	}
+		
+	public void OnPauseRunning(){
+		this.running_flag=false;
+		isFirstLoc = false;
+	}
+	
 	public MapFragment() {
 		// Required empty public constructor
 	}
@@ -64,9 +77,10 @@ public class MapFragment extends Fragment implements OnClickListener {
 		View myFragmentView=inflater.inflate(R.layout.fragment_map, container, false);
 		btn=(Button) myFragmentView.findViewById(R.id.changeview);
 		btn.setOnClickListener(this);
+		BDLocation location;
 		mMapView = (MapView)myFragmentView.findViewById(R.id.bmapView); 
 		
-		mBaiduMap = mMapView.getMap();  
+		    mBaiduMap = mMapView.getMap();  
 	        //普通地图  
 	        mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);  
 	         //卫星地图  
@@ -74,12 +88,15 @@ public class MapFragment extends Fragment implements OnClickListener {
 	        
 	        //mCurrentMode = LocationMode.NORMAL;
 	        mCurrentMode = LocationMode.FOLLOWING;
-			mBaiduMap
+			
+	        mBaiduMap
 					.setMyLocationConfigeration(new MyLocationConfigeration(
 							mCurrentMode, true, mCurrentMarker));
 			
 			// 开启定位图层
 					mBaiduMap.setMyLocationEnabled(true);
+					
+					
 					// 定位初始化
 					mLocClient = new LocationClient(getActivity());
 					mLocClient.registerLocationListener(myListener);
@@ -101,7 +118,8 @@ public class MapFragment extends Fragment implements OnClickListener {
 		 * 定位SDK监听函数
 		 */
 		public class MyLocationListenner implements BDLocationListener {
-			
+			//DistanceUtil util;
+			double len;
 			public List<LatLng> points = new ArrayList<LatLng>();
 			
 			@Override
@@ -141,21 +159,27 @@ public class MapFragment extends Fragment implements OnClickListener {
 							location.getLongitude());
 					MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
 					mBaiduMap.animateMapStatus(u);
-				}else {
+				}else if(running_flag) {
 					
 					if ((old_lat == 0) || (old_log == 0) ) 
 						return;
-					points.clear();
+					
+					  points.clear();
 					
 					  LatLng p1 = new LatLng(old_lat, old_log);
 					  LatLng p2 = new LatLng(locData.latitude, locData.longitude);
 					  points.add(p1);
 					  points.add(p2);
-					  //mMapView.getMap().clear();
-					  OverlayOptions ooPolyline = new PolylineOptions().width(5)
-							.color(0xAAFF0000).points(points);
-					  mBaiduMap.addOverlay(ooPolyline);	
-					
+				  
+					  
+					  len = DistanceUtil.getDistance(p1, p2);
+					  if(len<100){
+						  OverlayOptions ooPolyline = new PolylineOptions().width(5)
+									.color(0xAAFF0000).points(points);
+							  mBaiduMap.addOverlay(ooPolyline);	
+					     running_controller con=(running_controller)getActivity();
+					     con.AddLength(len);
+					  }
 				}
 				
 			    
@@ -214,7 +238,7 @@ public class MapFragment extends Fragment implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onAttach(activity);
 		mlistener=(Startrunning) activity;
-		
+		running_flag=true;
 	}
 
 	@Override
@@ -222,7 +246,7 @@ public class MapFragment extends Fragment implements OnClickListener {
 		// TODO Auto-generated method stub
 		if(v.getId() == R.id.changeview){
 			Log.i("MapFragment","changeview clicked");
-			mlistener.changeview();
+			//mlistener.changeview();
 		}
 	}
 		 

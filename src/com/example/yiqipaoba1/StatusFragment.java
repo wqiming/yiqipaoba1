@@ -22,7 +22,9 @@ public class StatusFragment extends Fragment implements OnClickListener {
     public int paused = 0;
     public long totaltime = 0;
     public long currenttime = 0;
+    public double totallen=0;
     TextView timerTextView;
+    TextView speedTextView;
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
     	 public void run() {
@@ -31,6 +33,7 @@ public class StatusFragment extends Fragment implements OnClickListener {
              int minutes = seconds / 60;
              seconds = seconds % 60;
              timerTextView.setText(String.format("%d'%02d\"", minutes, seconds));
+             speedTextView.setText(String.format("%.2f", (totallen*3600/currenttime)));
              timerHandler.postDelayed(this, 500);
     	 }
     };
@@ -39,6 +42,12 @@ public class StatusFragment extends Fragment implements OnClickListener {
 		// Required empty public constructor
 	}
 
+	public void AddLength(double len){
+		Log.i("StatusFragment","AddLength");
+		totallen=totallen+len;
+		TextView DistTextView = (TextView)getView().findViewById(R.id.distance);
+		DistTextView.setText(String.format("%.3f", totallen/1000));
+	}
 		
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,12 +68,14 @@ public class StatusFragment extends Fragment implements OnClickListener {
 		btn2=(Button)getView().findViewById(R.id.pause);
 		btn2.setOnClickListener(this);
 		timerTextView=(TextView)getView().findViewById(R.id.timer);
+		speedTextView=(TextView)getView().findViewById(R.id.speed);
 		startTime = System.currentTimeMillis();
         timerHandler.postDelayed(timerRunnable, 0);
 	}
 
 	@Override
 	public void onClick(View v) {
+		running_controller con=(running_controller)getActivity();
 		// TODO Auto-generated method stub
 		if(v.getId()==R.id.finish){
 			Log.i("StatusFragment","finish clicked");
@@ -75,11 +86,13 @@ public class StatusFragment extends Fragment implements OnClickListener {
 			Log.i("StatusFragment","pause clicked");
 			btn2.setText("¼ÌÐø");
 			timerHandler.removeCallbacks(timerRunnable);
+			con.onPauseRunning();
 			paused=1;
 			}else{
 				btn2.setText("ÔÝÍ£");
 				startTime = System.currentTimeMillis();
 				timerHandler.postDelayed(timerRunnable, 0);
+				con.onResumeRunning();
 				paused=0;
 			}
 		}

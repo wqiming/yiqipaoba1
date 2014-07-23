@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.os.Build;
 
-public class Startrunning extends ActionBarActivity {
+public class Startrunning extends ActionBarActivity implements running_controller{
 	MapFragment mapFragment;
 	StatusFragment statusFragment;
 	@Override
@@ -41,8 +41,28 @@ public class Startrunning extends ActionBarActivity {
     	transaction.commit();
 
 	}
+	@Override
+	public void AddLength(double len) {
+		// TODO Auto-generated method stub
+		Log.i("startrunning","AddLength");
+		statusFragment.AddLength(len);
+		
+	}
+	@Override
+	public void onResumeRunning() {
+		// TODO Auto-generated method stub
+		Log.i("startrunning","OnResumeRunning");
+		mapFragment.OnResumeRunning();
+	}
+	@Override
+	public void onPauseRunning() {
+		// TODO Auto-generated method stub
+		Log.i("startrunning","OnPauseRunning");
+		mapFragment.OnPauseRunning();
+	}
 
-    @SuppressLint("Recycle") public void changeview(){
+    /*
+	@SuppressLint("Recycle") public void changeview(){
     	Log.i("startrunning","changeview");
     	FragmentManager manager = getSupportFragmentManager();
     	android.support.v4.app.FragmentTransaction transaction=manager.beginTransaction();
@@ -56,4 +76,5 @@ public class Startrunning extends ActionBarActivity {
     	transaction.commit();
 
     }
+    */
 }
