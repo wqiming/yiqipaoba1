@@ -106,8 +106,8 @@ public class StatusFragment extends Fragment implements OnClickListener {
 	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		timerHandler.removeCallbacks(timerRunnable);
-		btn2.setText("ÔÝÍ£");
+		//timerHandler.removeCallbacks(timerRunnable);
+		//btn2.setText("ÔÝÍ£");
 	}
 
 }
