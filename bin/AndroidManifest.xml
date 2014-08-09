@@ -38,10 +38,7 @@
             android:name="com.example.yiqipaoba1.Startrunning"
             android:label="@string/title_activity_startrunning" >
         </activity>
-        <activity
-            android:name="com.example.yiqipaoba1.MapActivity"
-            android:label="@string/title_activity_map" >
-        </activity>
+       
     <service
     android:name="com.baidu.location.f"
     android:enabled="true"
