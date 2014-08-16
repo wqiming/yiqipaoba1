@@ -173,7 +173,7 @@ public class MapFragment extends Fragment implements OnClickListener {
 				  
 					  
 					  len = DistanceUtil.getDistance(p1, p2);
-					  if(len<100){
+					  if(len<10){
 						  OverlayOptions ooPolyline = new PolylineOptions().width(5)
 									.color(0xAAFF0000).points(points);
 							  mBaiduMap.addOverlay(ooPolyline);	
