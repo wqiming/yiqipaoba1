@@ -10,7 +10,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true" >
-
+        
+        
         <Button
             android:id="@+id/button1"
             android:layout_width="0dip"
@@ -26,5 +27,14 @@
             android:text="开始跑步" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/recordbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttoncontainer"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="105dp"
+        android:background="@drawable/recordbtn_selector" />
 
 </RelativeLayout>

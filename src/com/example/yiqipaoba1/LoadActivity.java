@@ -114,7 +114,8 @@ public class LoadActivity extends Activity {
 		super.onResume();
 		if(isOPen(getApplicationContext())){
 			Log.d(TAG, "load main activity");
-			   Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+			   //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+			   Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
 			   //startActivity(intent);
 			   startActivityForResult(intent, 2);
 			}		

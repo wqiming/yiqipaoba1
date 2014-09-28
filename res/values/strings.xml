@@ -12,5 +12,10 @@
     <string name="title_activity_fragment_runningmode">Fragment_runningmode</string>
     <string name="title_activity_startrunning">Startrunning</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="Login">登录</string>
+    <string name="register">注册</string>
 
 </resources>
