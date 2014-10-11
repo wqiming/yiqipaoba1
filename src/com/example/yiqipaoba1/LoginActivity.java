@@ -102,6 +102,9 @@ public class LoginActivity extends ActionBarActivity implements OnClickListener 
 					.add(new BasicNameValuePair("Username", name));
 				params
 					.add(new BasicNameValuePair("Password", pass));
+				//Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+				//startActivityForResult(intent, 2);
+				
 				try
 				{
 					// 设置请求参数
@@ -135,7 +138,7 @@ public class LoginActivity extends ActionBarActivity implements OnClickListener 
 				{
 					e.printStackTrace();
 				}
-		
+		        
 		}
 		
 	}

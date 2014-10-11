@@ -1,5 +1,10 @@
 package com.example.yiqipaoba1;
 
+import java.util.Calendar;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -18,6 +23,8 @@ import android.widget.TextView;
 public class StatusFragment extends Fragment implements OnClickListener {
     Button btn1;
     Button btn2;
+    
+    SQLiteDatabase db;
     long startTime = 0;
     public int paused = 0;
     public long totaltime = 0;
@@ -71,6 +78,18 @@ public class StatusFragment extends Fragment implements OnClickListener {
 		speedTextView=(TextView)getView().findViewById(R.id.speed);
 		startTime = System.currentTimeMillis();
         timerHandler.postDelayed(timerRunnable, 0);
+        db = SQLiteDatabase.openOrCreateDatabase(getActivity().getFilesDir()
+    			.toString() + "/rundata.db3" , null);	
+	}
+
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		if (db != null && db.isOpen())
+		{
+			db.close();
+		}
+		super.onDestroy();
 	}
 
 	@Override
@@ -79,6 +98,25 @@ public class StatusFragment extends Fragment implements OnClickListener {
 		// TODO Auto-generated method stub
 		if(v.getId()==R.id.finish){
 			Log.i("StatusFragment","finish clicked");
+			String date = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+			try 
+			{
+				insertData(db , date, "empty" , "empty");
+				//Cursor cursor = db.rawQuery("select * from rundb", null);
+			}
+			catch(SQLiteException  se)
+			{
+				//执行DDL创建数据表
+				db.execSQL("create table stats(_id integer primary key autoincrement,"
+					+ " date varchar(50),"
+					+ " distance varchar(50),"
+					+ " duration varchar(50))");
+				//执行insert语句插入数据
+				insertData(db , date, "empty" , "empty");
+				//执行查询
+				//Cursor cursor = db.rawQuery("select * from rundb", null);
+				
+			}
 		}
 		if(v.getId()==R.id.pause){
 			if(paused==0){
@@ -98,6 +136,13 @@ public class StatusFragment extends Fragment implements OnClickListener {
 		}
 	}
 
+
+	private void insertData(SQLiteDatabase db2, String date, String distance,
+			String duration) {
+		// TODO Auto-generated method stub
+		db.execSQL("insert into stats values(null , ? , ?, ?)"
+				, new String[]{date , distance, duration});
+	}
 
 	/* (non-Javadoc)
 	 * @see android.support.v4.app.Fragment#onPause()

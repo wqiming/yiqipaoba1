@@ -1,40 +1,62 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/table1"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
+   
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical" >
+        
+        <Button
+           android:id="@+id/recordbtn"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentLeft="true"
+           android:background="@drawable/recordbtn_selector" />
+        
+        <Button
+           android:id="@+id/personalbestbtn"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentLeft="true"
+           android:background="@drawable/personalbest_selector" />
+        
+         <Button
+           android:id="@+id/rankingbtn"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_alignParentLeft="true"
+           android:background="@drawable/ranking_selector" />
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/buttoncontainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true" >
-        
-        
+        android:layout_alignParentRight="true" 
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/button1"
             android:layout_width="0dip"
-            android:layout_weight="50"
             android:layout_height="fill_parent"
-            android:text="运动模式" />
+            android:layout_weight="50"
+            android:background="@drawable/runningmode_selector" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="0dip"
-            android:layout_weight="50"
             android:layout_height="fill_parent"
-            android:text="开始跑步" />
-
+            android:layout_weight="50"
+            android:background="@drawable/startrunning_selector" />
     </LinearLayout>
+    
 
-    <Button
-        android:id="@+id/recordbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/buttoncontainer"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="105dp"
-        android:background="@drawable/recordbtn_selector" />
-
-</RelativeLayout>
+</LinearLayout>
