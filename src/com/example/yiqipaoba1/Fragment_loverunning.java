@@ -65,8 +65,10 @@ public class Fragment_loverunning extends Fragment implements OnClickListener {
 		btn1.setOnClickListener(this);
 		Button btn2=(Button)myFragmentView.findViewById(R.id.button2);
 		btn2.setOnClickListener(this);
-		
-	    mLocationClient = new LocationClient(getActivity());     //声明LocationClient类
+		Button recordbtn = (Button)myFragmentView.findViewById(R.id.recordbtn);
+		recordbtn.setOnClickListener(this);
+/*	    
+		mLocationClient = new LocationClient(getActivity());     //声明LocationClient类
 		mLocationClient.registerLocationListener( myListener );    //注册监听函数
 			
 		LocationClientOption option = new LocationClientOption();
@@ -76,7 +78,7 @@ public class Fragment_loverunning extends Fragment implements OnClickListener {
 		    
 		mLocationClient.setLocOption(option);
 		mLocationClient.start();
-		
+*/		
 		return myFragmentView;
 	}
 
@@ -93,15 +95,17 @@ public class Fragment_loverunning extends Fragment implements OnClickListener {
 			 //startActivityForResult(intent, 2);
 		}
 		if(v.getId() == R.id.recordbtn){
+			Log.i("loverunning","record clicked");
+			 Intent intent = new Intent(getActivity(),StatActivity.class);
+			   startActivity(intent); 
 		
-			
 		}
 	}
 	
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
-		mLocationClient.stop();
+		//mLocationClient.stop();
 		super.onDestroy();
 	}
 

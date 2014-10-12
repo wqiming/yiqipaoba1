@@ -54,6 +54,10 @@
             android:name="com.example.yiqipaoba1.LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
+        <activity
+            android:name="com.example.yiqipaoba1.StatActivity"
+            android:label="@string/title_activity_stat" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
