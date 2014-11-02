@@ -18,5 +18,6 @@
     <string name="Login">登录</string>
     <string name="register">注册</string>
     <string name="title_activity_stat">StatActivity</string>
+    <string name="actionbar_title_discard">actionbar_discard</string>
 
 </resources>
