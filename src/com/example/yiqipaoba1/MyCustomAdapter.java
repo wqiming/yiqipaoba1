@@ -33,6 +33,7 @@ public class MyCustomAdapter extends CursorAdapter implements OnClickListener  {
 	@Override
 	public void bindView(View v, Context context, Cursor c) {
 		// TODO Auto-generated method stub
+		
 		 Log.i("newview","bindview");
 		 int Col = c.getColumnIndex("date");
 		 
@@ -46,6 +47,9 @@ public class MyCustomAdapter extends CursorAdapter implements OnClickListener  {
 	            dateText.setText(date);
 	        }
 	        
+	        CheckBox cb = (CheckBox)v.findViewById(R.id.checkBox);
+		     cb.setTag(c.getPosition());
+		     cb.setOnClickListener(this);
 	}
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
@@ -77,11 +81,32 @@ public class MyCustomAdapter extends CursorAdapter implements OnClickListener  {
 
 	@Override
 	public void onClick(View v) {
+		/*must set to int instead of Integer, otherwise the list.remove function will be confused*/
+		int i;
 		Cursor c = getCursor();
 		// TODO Auto-generated method stub
 		if(v.getId()==R.id.checkBox){
+			CheckBox cb = (CheckBox)v.findViewById(R.id.checkBox);
 			int pos = (Integer) v.getTag();
 			c.moveToPosition(pos);
+		    String date=c.getString(c.getColumnIndex("date"));
+			if(cb.isChecked()){
+			 
+			  Log.i("add", date);
+			  list.add(date);
+			  //Log.i("add", Integer.toString(pos));
+			  //Log.i("size of list=", Integer.toString(list.size()));
+			}else{
+				
+				
+			     i=list.indexOf(date);
+			     Log.i("remove checkbox index=", Integer.toString(i));
+				 if(i!=-1){
+			      list.remove(i);
+			      Log.i("size of list=", Integer.toString(list.size()));
+				}
+				
+			}
 			Log.i("checkbox",c.getString(c.getColumnIndex("date")));
 		}
 	}

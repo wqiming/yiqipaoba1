@@ -84,6 +84,16 @@ public class StatActivity extends ActionBarActivity {
         	  
         	  int count=adapter.list.size();
         	  Log.i("discard",Integer.toString(count));
+        	  int i;
+        	  for(i=0;i<count;i++){
+        		  Log.i("element",(adapter.list.get(i)));  
+        		  db.delete("stats", "date like ?", new String[]{adapter.list.get(i)});
+        		  adapter.notifyDataSetChanged();
+        		  Cursor cursor = db.rawQuery("select * from stats", null);
+        		  adapter.notifyDataSetChanged();
+        		  adapter.changeCursor(cursor);
+        	  }
+        	  
               return true;
           default:
               return super.onOptionsItemSelected(item);
