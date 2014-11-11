@@ -95,14 +95,23 @@ public class StatusFragment extends Fragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		running_controller con=(running_controller)getActivity();
+		
+		timerHandler.removeCallbacks(timerRunnable);
+		con.onPauseRunning();
+		
+		
 		// TODO Auto-generated method stub
 		if(v.getId()==R.id.finish){
 			Log.i("StatusFragment","finish clicked");
+			totaltime=currenttime;
+			String distance = String.format("%.3f", totallen/1000);
+			String duration = Integer.toString((int) totaltime);
 			String date = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 			try 
 			{
-				insertData(db , date, "empty" , "empty");
-				//Cursor cursor = db.rawQuery("select * from rundb", null);
+				insertData(db , date, distance, duration);
+				//Cursor cursor = db.rawQuery("select * from stats", null);
+				//Log.i("StatusFragment",Integer.toString(cursor.getCount()));
 			}
 			catch(SQLiteException  se)
 			{
@@ -112,9 +121,11 @@ public class StatusFragment extends Fragment implements OnClickListener {
 					+ " distance varchar(50),"
 					+ " duration varchar(50))");
 				//执行insert语句插入数据
-				insertData(db , date, "empty" , "empty");
+				insertData(db , date, distance, duration);
+
 				//执行查询
-				//Cursor cursor = db.rawQuery("select * from rundb", null);
+				//Cursor cursor = db.rawQuery("select * from stats", null);
+				//Log.i("StatusFragment",Integer.toString(cursor.getCount()));
 				
 			}
 		}

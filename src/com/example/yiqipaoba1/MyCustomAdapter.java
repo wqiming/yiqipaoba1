@@ -35,9 +35,9 @@ public class MyCustomAdapter extends CursorAdapter implements OnClickListener  {
 		// TODO Auto-generated method stub
 		
 		 Log.i("newview","bindview");
-		 int Col = c.getColumnIndex("date");
+		 int nameCol = c.getColumnIndex("date");
 		 
-	        String date = c.getString(Col);
+	     String date = c.getString(nameCol);
 	 
 	        /**
 	         * Next set the name of the entry.
@@ -46,10 +46,23 @@ public class MyCustomAdapter extends CursorAdapter implements OnClickListener  {
 	        if (dateText != null) {
 	            dateText.setText(date);
 	        }
+	      
+	        nameCol = c.getColumnIndex("distance");
+		     String distance = c.getString(nameCol);
+		     TextView distanceText = (TextView) v.findViewById(R.id.distance);
+		     distanceText.setText(distance); 
 	        
+		     nameCol = c.getColumnIndex("duration");
+		     String duration = c.getString(nameCol);
+		     TextView durationText = (TextView) v.findViewById(R.id.duration);
+		     durationText.setText(duration);
+		     
 	        CheckBox cb = (CheckBox)v.findViewById(R.id.checkBox);
 		     cb.setTag(c.getPosition());
 		     cb.setOnClickListener(this);
+		     if (cb.isChecked()) {
+		         cb.setChecked(false);
+		     }
 	}
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
@@ -63,16 +76,26 @@ public class MyCustomAdapter extends CursorAdapter implements OnClickListener  {
 	     int nameCol = c.getColumnIndex("date");
 	     String date = c.getString(nameCol);
 	     TextView dateText = (TextView) v.findViewById(R.id.date);
-	    
-	    
 	     if (dateText != null) {
 	            dateText.setText(date);
 	        }
 	     
+	     nameCol = c.getColumnIndex("distance");
+	     String distance = c.getString(nameCol);
+	     TextView distanceText = (TextView) v.findViewById(R.id.distance);
+	     distanceText.setText(distance);
+	     
+	     nameCol = c.getColumnIndex("duration");
+	     String duration = c.getString(nameCol);
+	     TextView durationText = (TextView) v.findViewById(R.id.duration);
+	     durationText.setText(duration);
+	     
 	     CheckBox cb = (CheckBox)v.findViewById(R.id.checkBox);
 	     cb.setTag(c.getPosition());
 	     cb.setOnClickListener(this);
-	    
+	     if (cb.isChecked()) {
+	         cb.setChecked(false);
+	     }
 	 
 	        
 	     return v;

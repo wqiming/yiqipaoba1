@@ -28,7 +28,7 @@ public class StatActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_stat);
 		db = SQLiteDatabase.openOrCreateDatabase(this.getFilesDir()
-				.toString() + "/my.db3" , null);		
+				.toString() + "/rundata.db3" , null);		
 		listView = (ListView)findViewById(R.id.recordlist);
 		setTitle("我的跑步纪录");
 		String date = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
